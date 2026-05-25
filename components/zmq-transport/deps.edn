@@ -1,4 +1,4 @@
 {:paths ["src" "resources"]
- :deps {}
+ :deps {org.zeromq/jeromq {:mvn/version "0.6.0"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {}}}}

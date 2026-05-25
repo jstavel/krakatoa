@@ -17,8 +17,8 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
 
 ## Step 3: ZeroMQ Component (Clojure)
 - [x] Create component `components/zmq-transport`.
-- [ ] Add `interface.clj` defining `send-message!` and `receive-message!`.
-- [ ] Implement using JZMQ or jeromq (Pure Java ZMQ implementation for REPL stability).
+- [x] Add `interface.clj` defining `send-message!` and `receive-message!`.
+- [x] Implement using JZMQ or jeromq (Pure Java ZMQ implementation for REPL stability).
 
 ## Step 4: Rust Engine Skeleton
 - [ ] Add `zmq` create to `engine/Cargo.toml`.
