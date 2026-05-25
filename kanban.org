@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       089f5e9d-54e5-4d76-8c9a-b9a2a762c174
+:END:
+#+TITLE: Project Krakatoa: Kanban & GTD Board
+#+AUTHOR: Jan Stavěl
+#+STARTUP: content indent
+#+TODO: BACKLOG(b) NEXT(n) WIP(w) | DONE(d) CANCELLED(c)
+
+* PROJECT METRICS & ANCHOR
+:PROPERTIES:
+:Phase:     Initialization & Infrastructure Bootstrap
+:Target:    1M+ RPS Polyglot MVP
+:Language:  Clojure (Polylith), Rust
+:END:
+
+This file serves as Horizon 1 (Next Actions) for cognitive anchoring.
+Global specification lives in [[file:docs/specification.md][docs/specification.md]].
+Individual design choices live in [[file:docs/adr/][docs/adr/]].
+
+* KANBAN BOARD
+
+** BACKLOG
+Detailed tasks waiting for prioritization and architectural readiness.
+
+*** BACKLOG Milestone 2: Core Matching Engine (Rust)
+**** BACKLOG Implement custom Memory Pool / Allocator for zero-allocation hot path
+**** BACKLOG Design internal Order Book data structure (Bids/Asks vectors/maps)
+**** BACKLOG Implement Limit Order processing logic
+**** BACKLOG Implement Market Order processing logic
+
+*** BACKLOG Milestone 3: High-Availability & Chaos (Clojure/Infra)
+**** BACKLOG Set up Packer templates for minimal KVM .qcow2 base OS images
+**** BACKLOG Create Terraform layouts to spin up isolated private network nodes
+**** BACKLOG Implement Clojure Atom + CAS (Compare-And-Swap) for lock-free routing
+**** BACKLOG Implement Heartbeat listener and atomic Hot-Failover switch
+**** BACKLOG Create destructive `chaos-orchestra` load injection suite
+
+*** BACKLOG Milestone 4: Full-Stack Frontend Overlay
+**** BACKLOG Choose paradigm (Re-frame event-driven SPA or htmx server-driven stream)
+**** BACKLOG Create real-time rendering engine for the in-memory Order Book
+
+** NEXT
+Prioritized items selected for the immediate next execution slice. 
+*Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
+
+*** NEXT Milestone 1: The Walking Skeleton [0/5]
+- [ ] Initialize Root Monorepo and basic .gitignore
+- [ ] Scaffold Polylith Workspace for Clojure
+- [ ] Scaffold standard Cargo binary crate inside `engine/`
+- [ ] Setup rootless Podman Compose environment for local Kafka broker
+- [ ] Implement barebones ZeroMQ raw byte ping-pong across Clojure/Rust boundary
+
+** WIP
+Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.
+
+*** WIP Initialize Krakatoa Repository & Documentation Architecture
+:PROPERTIES:
+:STARTED:  [2026-05-24 Sun 23:15]
+:Aider:    Context loaded with specification.md and current_slice.md
+:END:
+Current effort focused on settling the documentation framework and mapping GTD horizons before pulling down code dependencies.
+
+** DONE
+Completed milestones and historical archive of done slices.
+
+*** DONE Finalize Project Architecture & Technical Pillars Specification :ARCHIVE:
+CLOSED: [2026-05-24 Sun 23:00]
+Defined Polylith integration, Rust matching layer, off-heap buffering, and KVM hybrid infrastructure. Documented inside `docs/specification.md`.
+
+* EMACS CONFIGURATION HINT :PROPERTIES:
+:VISIBILITY: folded
+:END:
+To view this file as a visual Kanban board inside Emacs, you can use `org-sidebar`, 
+`org-fancy-priorities`, or simply generate an agenda view filtered by these explicit TODO states:
+#+BEGIN_SRC elisp
+(setq org-todo-keywords
+      '((sequence "BACKLOG(b)" "NEXT(n)" "WIP(w)" "|" "DONE(d)" "CANCELLED(c)")))
+#+END_SRC
