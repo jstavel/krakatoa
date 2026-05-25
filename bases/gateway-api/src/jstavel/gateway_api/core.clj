@@ -16,3 +16,19 @@
         :ok)
       :error)))
 
+(defn -main [& _args]
+  (println "Starting Gateway E2E Validation...")
+  (let [zmq-conn (zmq/connect "tcp://localhost:5555")
+        producer (kafka/create-producer "localhost:9092")
+        topic "order-log"
+        payload (.getBytes "ORDER-123,BUY,BTC,1.0,50000" "UTF-8")]
+    (try
+      (let [result (submit-order! {:zmq-socket zmq-conn
+                                   :kafka-producer producer
+                                   :topic topic
+                                   :payload payload})]
+        (println "Result:" result))
+      (finally
+        (zmq/close! zmq-conn)
+        (kafka/close! producer)))))
+
