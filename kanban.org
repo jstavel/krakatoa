@@ -43,12 +43,13 @@ Detailed tasks waiting for prioritization and architectural readiness.
 Prioritized items selected for the immediate next execution slice. 
 *Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
 
-*** WIP Milestone 1: The Walking Skeleton [4/5]
+*** WIP Milestone 1: The Walking Skeleton [5/6]
 - [X] Initialize Root Monorepo and basic .gitignore
 - [X] Scaffold Polylith Workspace for Clojure
 - [X] Scaffold standard Cargo binary create inside `engine/`
 - [X] Setup rootless Podman Compose environment for local Kafka broker
 - [ ] Implement barebones ZeroMQ raw byte ping-pong across Clojure/Rust boundary
+- [X] write ADR for Rust Engine Zero-Allocation
 
 ** WIP
 Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.
