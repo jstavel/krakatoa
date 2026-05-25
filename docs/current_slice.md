@@ -30,12 +30,12 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
 - [x] Add `interface.clj` defining `log-transaction!`.
 - [x] Implement using `clojure-kafka-client` or raw `kafka-clients` library.
 
-## Step 6: The Integrated Base (Gateway API)
-- [ ] Create base `bases/gateway-api`.
-- [ ] Implement a function that:
+## Step 6: The Integrated Base (Gateway API) [DONE]
+- [x] Create base `bases/gateway-api`.
+- [x] Implement a function that:
     1. Accepts a payload.
     2. Sends it to the Rust Engine via `zmq-transport`.
-    3. On `ACK`, asynchronously writes the payload to `kafka-client`.
+    3. On `ACK`, persists payload to `kafka-client`.
 - [ ] Create a `projects/live-gateway` to bundle these components.
 
 ## Step 7: Validation (REPL Driven)

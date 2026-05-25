@@ -1,5 +1,6 @@
 {:paths ["src" "resources"]
- :deps {}
+ :deps {jstavel/zmq-transport {:polylith/tag "local"}
+        jstavel/kafka-client {:polylith/tag "local"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {}}}}
 
