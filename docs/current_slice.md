@@ -10,18 +10,18 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
 - [x] Initialize a new Rust project in `engine/` using `cargo init --bin`.
 
 ## Step 2: Infrastructure Bootstrap (Local)
-- [ ] Create `infra/podman-local/compose.yaml` to spin up:
+- [x] Create `infra/podman-local/compose.yaml` to spin up:
     - Redpanda (Kafka-compatible)
     - Zookeeper (if required by chosen Kafka distribution)
-- [ ] Verify connectivity to Kafka using a local CLI tool.
+- [x] Verify connectivity to Kafka using a local CLI tool.
 
 ## Step 3: ZeroMQ Component (Clojure)
-- [ ] Create component `components/zmq-transport`.
+- [x] Create component `components/zmq-transport`.
 - [ ] Add `interface.clj` defining `send-message!` and `receive-message!`.
 - [ ] Implement using JZMQ or jeromq (Pure Java ZMQ implementation for REPL stability).
 
 ## Step 4: Rust Engine Skeleton
-- [ ] Add `zmq` crate to `engine/Cargo.toml`.
+- [ ] Add `zmq` create to `engine/Cargo.toml`.
 - [ ] Implement a basic `REP` (Reply) socket listener in `engine/src/main.rs`.
 - [ ] Logic: Receive bytes -> Log to stdout -> Return `[0x06]` (ACK).
 
