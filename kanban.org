@@ -43,25 +43,26 @@ Detailed tasks waiting for prioritization and architectural readiness.
 Prioritized items selected for the immediate next execution slice. 
 *Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
 
-*** NEXT Milestone 1: The Walking Skeleton [0/5]
-- [ ] Initialize Root Monorepo and basic .gitignore
-- [ ] Scaffold Polylith Workspace for Clojure
-- [ ] Scaffold standard Cargo binary crate inside `engine/`
+*** WIP Milestone 1: The Walking Skeleton [2/5]
+- [X] Initialize Root Monorepo and basic .gitignore
+- [X] Scaffold Polylith Workspace for Clojure
+- [ ] Scaffold standard Cargo binary create inside `engine/`
 - [ ] Setup rootless Podman Compose environment for local Kafka broker
 - [ ] Implement barebones ZeroMQ raw byte ping-pong across Clojure/Rust boundary
 
 ** WIP
 Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.
 
-*** WIP Initialize Krakatoa Repository & Documentation Architecture
+
+** DONE
+Completed milestones and historical archive of done slices.
+*** DONE Initialize Krakatoa Repository & Documentation Architecture
+CLOSED: [2026-05-25 Mon 15:46]
 :PROPERTIES:
 :STARTED:  [2026-05-24 Sun 23:15]
 :Aider:    Context loaded with specification.md and current_slice.md
 :END:
 Current effort focused on settling the documentation framework and mapping GTD horizons before pulling down code dependencies.
-
-** DONE
-Completed milestones and historical archive of done slices.
 
 *** DONE Finalize Project Architecture & Technical Pillars Specification :ARCHIVE:
 CLOSED: [2026-05-24 Sun 23:00]
