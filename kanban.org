@@ -43,13 +43,19 @@ Detailed tasks waiting for prioritization and architectural readiness.
 Prioritized items selected for the immediate next execution slice. 
 *Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
 
-*** WIP Milestone 1: The Walking Skeleton [5/6]
-- [X] Initialize Root Monorepo and basic .gitignore
-- [X] Scaffold Polylith Workspace for Clojure
-- [X] Scaffold standard Cargo binary create inside `engine/`
-- [X] Setup rootless Podman Compose environment for local Kafka broker
-- [ ] Implement barebones ZeroMQ raw byte ping-pong across Clojure/Rust boundary
-- [X] write ADR for Rust Engine Zero-Allocation
+** NEXT
+Prioritized items selected for the immediate next execution slice. 
+*Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
+
+*** WIP Milestone 1: The Walking Skeleton [5/8]
+- [X] Initialize Root Monorepo and basic .gitignore (Step 1)
+- [X] Scaffold Polylith Workspace & Cargo binary (Step 1)
+- [X] Setup rootless Podman Compose for local Kafka/Redpanda (Step 2)
+- [X] Write ADR for Rust Engine Zero-Allocation
+- [ ] Implement barebones ZeroMQ raw byte ping-pong across Clojure/Rust boundary (Step 3 & 4)
+- [X] Create Clojure Kafka Client component (Step 5)
+- [ ] Implement the Integrated Base / Gateway API (Step 6)
+- [ ] Execute end-to-end REPL validation & check Kafka topic (Step 7)
 
 ** WIP
 Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.

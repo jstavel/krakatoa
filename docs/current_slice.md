@@ -15,20 +15,20 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
     - Zookeeper (if required by chosen Kafka distribution)
 - [x] Verify connectivity to Kafka using a local CLI tool.
 
-## Step 3: ZeroMQ Component (Clojure)
+## Step 3: ZeroMQ Component (Clojure) [DONE]
 - [x] Create component `components/zmq-transport`.
 - [x] Add `interface.clj` defining `send-message!` and `receive-message!`.
 - [x] Implement using JZMQ or jeromq (Pure Java ZMQ implementation for REPL stability).
 
-## Step 4: Rust Engine Skeleton
+## Step 4: Rust Engine Skeleton [DONE]
 - [x] Add `zmq` crate to `engine/Cargo.toml`.
 - [x] Implement a basic `REP` (Reply) socket listener in `engine/src/main.rs`.
 - [x] Logic: Receive bytes -> Log to stdout -> Return `[0x06]` (ACK).
 
-## Step 5: Kafka Client Component (Clojure)
-- [ ] Create component `components/kafka-client`.
-- [ ] Add `interface.clj` defining `log-transaction!`.
-- [ ] Implement using `clojure-kafka-client` or raw `kafka-clients` library.
+## Step 5: Kafka Client Component (Clojure) [DONE]
+- [x] Create component `components/kafka-client`.
+- [x] Add `interface.clj` defining `log-transaction!`.
+- [x] Implement using `clojure-kafka-client` or raw `kafka-clients` library.
 
 ## Step 6: The Integrated Base (Gateway API)
 - [ ] Create base `bases/gateway-api`.

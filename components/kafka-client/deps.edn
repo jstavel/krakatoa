@@ -1,4 +1,4 @@
 {:paths ["src" "resources"]
- :deps {}
+ :deps {org.apache.kafka/kafka-clients {:mvn/version "3.7.0"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {}}}}
