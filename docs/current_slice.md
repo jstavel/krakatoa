@@ -36,7 +36,7 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
     1. Accepts a payload.
     2. Sends it to the Rust Engine via `zmq-transport`.
     3. On `ACK`, persists payload to `kafka-client`.
-- [ ] Create a `projects/live-gateway` to bundle these components.
+- [x] Create a `projects/live-gateway` to bundle these components.
 
 ## Step 7: Validation (REPL Driven)
 - [x] Start the Rust engine.

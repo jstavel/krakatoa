@@ -1,6 +1,11 @@
-{:aliases  {:dev {:extra-paths ["development/src"]
+{:aliases  {:dev {:extra-paths ["development/src"
+                                "bases/gateway-api/src"
+                                "components/kafka-client/src"
+                                "components/zmq-transport/src"]
 
-                  :extra-deps {org.clojure/clojure {:mvn/version "1.12.3"}}}
+                  :extra-deps {org.clojure/clojure {:mvn/version "1.12.3"}
+                               org.zeromq/jeromq {:mvn/version "0.6.0"}
+                               org.apache.kafka/kafka-clients {:mvn/version "3.7.0"}}}
 
             :test {:extra-paths []}
 

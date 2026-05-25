@@ -47,7 +47,7 @@ Prioritized items selected for the immediate next execution slice.
 Prioritized items selected for the immediate next execution slice. 
 *Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
 
-*** WIP Milestone 1: The Walking Skeleton [7/8]
+*** WIP Milestone 1: The Walking Skeleton [8/8]
 - [X] Initialize Root Monorepo and basic .gitignore (Step 1)
 - [X] Scaffold Polylith Workspace & Cargo binary (Step 1)
 - [X] Setup rootless Podman Compose for local Kafka/Redpanda (Step 2)
@@ -55,6 +55,7 @@ Prioritized items selected for the immediate next execution slice.
 - [X] Implement barebones ZeroMQ raw byte ping-pong across Clojure/Rust boundary (Step 3 & 4)
 - [X] Create Clojure Kafka Client component (Step 5)
 - [X] Implement the Integrated Base / Gateway API (Step 6)
+- [X] Finalize project dependencies for `live-gateway`
 - [WIP] Execute end-to-end REPL validation & check Kafka topic (Step 7)
 
 ** WIP

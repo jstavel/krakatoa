@@ -1,4 +1,7 @@
-{:deps {org.clojure/clojure {:mvn/version "1.12.3"}}
+{:deps {org.clojure/clojure {:mvn/version "1.12.3"}
+        jstavel/gateway-api {:polylith/tag "local"}
+        jstavel/zmq-transport {:polylith/tag "local"}
+        jstavel/kafka-client {:polylith/tag "local"}}
 
  :aliases {:test {:extra-paths []
                   :extra-deps  {}}}}
