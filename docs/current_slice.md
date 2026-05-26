@@ -39,6 +39,7 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
 - [x] Create a `projects/live-gateway` to bundle these components.
 
 ## Step 7: Validation (REPL Driven)
+- [x] Extend `deps.edn` with support for Emacs-CIDER.
 - [x] Start the Rust engine.
 - [ ] Start the Polylith execution via development project.
 - [ ] Execute the gateway function.

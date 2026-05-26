@@ -11,4 +11,16 @@
 
             :poly {:main-opts ["-m" "polylith.clj.core.poly-cli.core"]
                    :jvm-opts ["--enable-native-access=ALL-UNNAMED"]
-                   :extra-deps {polylith/clj-poly {:mvn/version "0.3.32"}}}}}
+                   :extra-deps {polylith/clj-poly {:mvn/version "0.3.32"}}}
+
+            :cider {:jvm-opts ["-Dclojure.server.repl={:port 5555 :accept clojure.core.server/repl}"
+                               "-Djdk.attach.allowAttachSelf=true"
+                               "--add-system-property=jdk.httpclient.allowRestrictedHeaders=true"
+                               "--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED"
+                               "--add-opens=java.base/java.nio=ALL-UNNAMED"
+                               "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"
+                               "--add-opens=java.management/com.sun.jmx.remote.internal.rmi=ALL-UNNAMED"
+                               "--add-opens=java.management/javax.management.remote.rmi=ALL-UNNAMED"
+                               "--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED"]
+                    :extra-deps {cider/cider-nrepl {:mvn/version "0.49.0"}
+                                 nrepl/nrepl {:mvn/version "1.1.1"}}}}}
