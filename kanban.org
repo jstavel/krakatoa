@@ -22,9 +22,9 @@ Individual design choices live in [[file:docs/adr/][docs/adr/]].
 ** BACKLOG
 Detailed tasks waiting for prioritization and architectural readiness.
 
-- [-] fix(guide): normalize kanban.org and README.md for GitHub visualization
+- [X] fix(guide): normalize kanban.org and README.md for GitHub visualization
   - [X] Convert nested sections to checkbox lists in kanban.org
-  - [ ] Implement README.md status table for quick progress tracking
+  - [X] Implement README.md status table for quick progress tracking
 
 - [ ] fix(guide): verify message passing in local-stack-deployment.md
   :PROPERTIES:
