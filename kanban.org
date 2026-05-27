@@ -22,32 +22,37 @@ Individual design choices live in [[file:docs/adr/][docs/adr/]].
 ** BACKLOG
 Detailed tasks waiting for prioritization and architectural readiness.
 
-*** BACKLOG fix(guide) 
-:PROPERTIES:
-:ID:       a12c9b12-7701-4769-9459-4bc4ed6f0482
-:END:
-[[file:docs/guides/local-stack-deployment.md::require '\[jstavel.gateway-api.core :as gateway\]][howto send message]]
-en example how to send is in -main function
-- add a final verification
-  #+begin_src shell
-    podman exec -it redpanda-krakatoa rpk topic consume order-log -f '%v\n'
-  #+end_src
-*** BACKLOG Milestone 2: Core Matching Engine (Rust)
-**** BACKLOG Implement custom Memory Pool / Allocator for zero-allocation hot path
-**** BACKLOG Design internal Order Book data structure (Bids/Asks vectors/maps)
-**** BACKLOG Implement Limit Order processing logic
-**** BACKLOG Implement Market Order processing logic
+- [-] fix(guide): normalize kanban.org and README.md for GitHub visualization
+  - [X] Convert nested sections to checkbox lists in kanban.org
+  - [ ] Implement README.md status table for quick progress tracking
 
-*** BACKLOG Milestone 3: High-Availability & Chaos (Clojure/Infra)
-**** BACKLOG Set up Packer templates for minimal KVM .qcow2 base OS images
-**** BACKLOG Create Terraform layouts to spin up isolated private network nodes
-**** BACKLOG Implement Clojure Atom + CAS (Compare-And-Swap) for lock-free routing
-**** BACKLOG Implement Heartbeat listener and atomic Hot-Failover switch
-**** BACKLOG Create destructive `chaos-orchestra` load injection suite
+- [ ] fix(guide): verify message passing in local-stack-deployment.md
+  :PROPERTIES:
+  :ID:       a12c9b12-7701-4769-9459-4bc4ed6f0482
+  :END:
+  [[file:docs/guides/local-stack-deployment.md::require '\[jstavel.gateway-api.core :as gateway\]][howto send message]]
+  An example how to send is in -main function
+  - [ ] Add a final verification
+    #+begin_src shell
+      podman exec -it redpanda-krakatoa rpk topic consume order-log -f '%v\n'
+    #+end_src
 
-*** BACKLOG Milestone 4: Full-Stack Frontend Overlay
-**** BACKLOG Choose paradigm (Re-frame event-driven SPA or htmx server-driven stream)
-**** BACKLOG Create real-time rendering engine for the in-memory Order Book
+- [ ] Milestone 2: Core Matching Engine (Rust)
+  - [ ] Implement custom Memory Pool / Allocator for zero-allocation hot path
+  - [ ] Design internal Order Book data structure (Bids/Asks vectors/maps)
+  - [ ] Implement Limit Order processing logic
+  - [ ] Implement Market Order processing logic
+
+- [ ] Milestone 3: High-Availability & Chaos (Clojure/Infra)
+  - [ ] Set up Packer templates for minimal KVM .qcow2 base OS images
+  - [ ] Create Terraform layouts to spin up isolated private network nodes
+  - [ ] Implement Clojure Atom + CAS (Compare-And-Swap) for lock-free routing
+  - [ ] Implement Heartbeat listener and atomic Hot-Failover switch
+  - [ ] Create destructive `chaos-orchestra` load injection suite
+
+- [ ] Milestone 4: Full-Stack Frontend Overlay
+  - [ ] Choose paradigm (Re-frame event-driven SPA or htmx server-driven stream)
+  - [ ] Create real-time rendering engine for the in-memory Order Book
 
 ** NEXT 
 Prioritized items selected for the immediate next execution slice. 
@@ -58,6 +63,7 @@ Tasks currently in active development. Max 1-2 items at a time to prevent cognit
 
 ** DONE
 Completed milestones and historical archive of done slices.
+
 *** DONE Milestone 1: The Walking Skeleton [8/8]
 CLOSED: [2026-05-27 Wed 11:18]
 - [X] Initialize Root Monorepo and basic .gitignore (Step 1)
@@ -83,7 +89,8 @@ Current effort focused on settling the documentation framework and mapping GTD h
 CLOSED: [2026-05-24 Sun 23:00]
 Defined Polylith integration, Rust matching layer, off-heap buffering, and KVM hybrid infrastructure. Documented inside `docs/specification.md`.
 
-* EMACS CONFIGURATION HINT :PROPERTIES:
+* EMACS CONFIGURATION HINT
+:PROPERTIES:
 :VISIBILITY: folded
 :END:
 To view this file as a visual Kanban board inside Emacs, you can use `org-sidebar`, 

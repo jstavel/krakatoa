@@ -8,6 +8,14 @@ High-performance polyglot matching engine (Clojure/Rust) built on Polylith archi
 
 By pairing a zero-allocation matching core written in **Rust** with a flexible, modular gateway and supervisor layer written in **Clojure**, Krakatoa achieves extreme performance without sacrificing architectural clarity.
 
+## Project Kanban Board
+
+| 📥 BACKLOG | ⏭️ NEXT | 🛠️ WIP | ✅ DONE |
+| :--- | :--- | :--- | :--- |
+| • [Milestone 2: Engine](kanban.org#milestone-2) | | | • [Milestone 1: Skeleton](kanban.org#milestone-1) |
+| • [Milestone 3: HA/Chaos](kanban.org#milestone-3) | | | |
+| • [Milestone 4: Frontend](kanban.org#milestone-4) | | | |
+
 ## Key Features & Pillars
 
 - **Polylith Architecture:** The Clojure layer is built using strict component-based design, allowing 100% code reuse between production gateways and destruction testware.
@@ -27,9 +35,10 @@ The repository follows a strict separation between long-term architectural speci
 
 ```text
 krakatoa/
-├── components/          # Shared, immutable Clojure components (Polylith)
-├── bases/               # Ingress gateways and exposed entry points
-├── projects/            # Executable and deployable Clojure artifacts
-├── engine/              # Core High-Velocity Matching Engine in Rust
-├── infra/               # Infrastructure automation (Packer, Terraform, Podman)
-└── docs/                # Project documentation, specifications, and ADRs
+├── components/         # Shared, immutable Clojure components (Polylith)
+├── bases/              # Ingress gateways and exposed entry points
+├── projects/           # Executable and deployable Clojure artifacts
+├── engine/             # Core High-Velocity Matching Engine in Rust
+├── infra/              # Infrastructure automation (Packer, Terraform, Podman)
+└── docs/               # Project documentation, specifications, and ADRs
+```
