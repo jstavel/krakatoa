@@ -39,14 +39,12 @@ Detailed tasks waiting for prioritization and architectural readiness.
 **** BACKLOG Choose paradigm (Re-frame event-driven SPA or htmx server-driven stream)
 **** BACKLOG Create real-time rendering engine for the in-memory Order Book
 
-** NEXT
+** NEXT 
 Prioritized items selected for the immediate next execution slice. 
 *Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
 
-** NEXT
-Prioritized items selected for the immediate next execution slice. 
-*Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
-
+** WIP
+Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.
 *** WIP Milestone 1: The Walking Skeleton [8/8]
 - [X] Initialize Root Monorepo and basic .gitignore (Step 1)
 - [X] Scaffold Polylith Workspace & Cargo binary (Step 1)
@@ -58,10 +56,6 @@ Prioritized items selected for the immediate next execution slice.
 - [X] Finalize project dependencies for `live-gateway`
 - [X] Extend `deps.edn` with support for Emacs-CIDER.
 - [WIP] Execute end-to-end REPL validation & check Kafka topic (Step 7)
-
-** WIP
-Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.
-
 
 ** DONE
 Completed milestones and historical archive of done slices.

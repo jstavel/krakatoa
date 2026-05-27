@@ -47,3 +47,4 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
     - [ ] Rust logs the message.
     - [ ] Kafka topic `order-log` contains the message.
     - [ ] REPL receives the "OK" response.
+	
