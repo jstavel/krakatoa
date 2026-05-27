@@ -38,13 +38,13 @@ Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engi
     3. On `ACK`, persists payload to `kafka-client`.
 - [x] Create a `projects/live-gateway` to bundle these components.
 
-## Step 7: Validation (REPL Driven)
+## Step 7: Validation (REPL Driven) [DONE]
 - [x] Extend `deps.edn` with support for Emacs-CIDER.
 - [x] Start the Rust engine.
-- [ ] Start the Polylith execution via development project.
-- [ ] Execute the gateway function.
-- [ ] Verify:
-    - [ ] Rust logs the message.
-    - [ ] Kafka topic `order-log` contains the message.
-    - [ ] REPL receives the "OK" response.
+- [x] Start the Polylith execution via development project.
+- [x] Execute the gateway function.
+- [x] Verify:
+    - [x] Rust logs the message.
+    - [x] Kafka topic `order-log` contains the message.
+    - [x] REPL receives the "OK" response.
 	
