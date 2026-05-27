@@ -22,6 +22,16 @@ Individual design choices live in [[file:docs/adr/][docs/adr/]].
 ** BACKLOG
 Detailed tasks waiting for prioritization and architectural readiness.
 
+*** BACKLOG fix(guide) 
+:PROPERTIES:
+:ID:       a12c9b12-7701-4769-9459-4bc4ed6f0482
+:END:
+[[file:docs/guides/local-stack-deployment.md::require '\[jstavel.gateway-api.core :as gateway\]][howto send message]]
+en example how to send is in -main function
+- add a final verification
+  #+begin_src shell
+    podman exec -it redpanda-krakatoa rpk topic consume order-log -f '%v\n'
+  #+end_src
 *** BACKLOG Milestone 2: Core Matching Engine (Rust)
 **** BACKLOG Implement custom Memory Pool / Allocator for zero-allocation hot path
 **** BACKLOG Design internal Order Book data structure (Bids/Asks vectors/maps)
@@ -45,7 +55,11 @@ Prioritized items selected for the immediate next execution slice.
 
 ** WIP
 Tasks currently in active development. Max 1-2 items at a time to prevent cognitive overload.
-*** WIP Milestone 1: The Walking Skeleton [8/8]
+
+** DONE
+Completed milestones and historical archive of done slices.
+*** DONE Milestone 1: The Walking Skeleton [8/8]
+CLOSED: [2026-05-27 Wed 11:18]
 - [X] Initialize Root Monorepo and basic .gitignore (Step 1)
 - [X] Scaffold Polylith Workspace & Cargo binary (Step 1)
 - [X] Setup rootless Podman Compose for local Kafka/Redpanda (Step 2)
@@ -55,10 +69,8 @@ Tasks currently in active development. Max 1-2 items at a time to prevent cognit
 - [X] Implement the Integrated Base / Gateway API (Step 6)
 - [X] Finalize project dependencies for `live-gateway`
 - [X] Extend `deps.edn` with support for Emacs-CIDER.
-- [WIP] Execute end-to-end REPL validation & check Kafka topic (Step 7)
+- [X] Execute end-to-end REPL validation & check Kafka topic (Step 7)
 
-** DONE
-Completed milestones and historical archive of done slices.
 *** DONE Initialize Krakatoa Repository & Documentation Architecture
 CLOSED: [2026-05-25 Mon 15:46]
 :PROPERTIES:
