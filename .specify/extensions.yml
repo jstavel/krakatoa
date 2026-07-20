@@ -1,0 +1,6 @@
+hooks:
+  before_specify:
+    - extension: git
+      command: speckit.branch
+      optional: false
+      prompt: "Create a git branch for this feature"
