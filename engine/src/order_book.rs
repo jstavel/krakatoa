@@ -2,6 +2,7 @@ use crate::types::{BookSnapshot, OrderResult, OrderStatus, PriceLevel};
 
 pub struct OrderBook {
     bids: Vec<PriceLevel>,
+    asks: Vec<PriceLevel>,
     order_ids: Vec<String>,
 }
 
@@ -9,6 +10,7 @@ impl OrderBook {
     pub fn new() -> Self {
         OrderBook {
             bids: Vec::with_capacity(128),
+            asks: Vec::with_capacity(128),
             order_ids: Vec::with_capacity(128),
         }
     }
@@ -99,6 +101,96 @@ impl OrderBook {
             book_snap: BookSnapshot {
                 bids_changed: vec![level],
                 asks_changed: vec![],
+            },
+        }
+    }
+
+    pub fn place_limit_sell(&mut self, order_id: String, price: u64, qty: u64) -> OrderResult {
+        if price == 0 {
+            return OrderResult {
+                order_id,
+                status: OrderStatus::Rejected,
+                trades: vec![],
+                book_snap: BookSnapshot {
+                    bids_changed: vec![],
+                    asks_changed: vec![],
+                },
+            };
+        }
+
+        if qty == 0 {
+            return OrderResult {
+                order_id,
+                status: OrderStatus::Rejected,
+                trades: vec![],
+                book_snap: BookSnapshot {
+                    bids_changed: vec![],
+                    asks_changed: vec![],
+                },
+            };
+        }
+
+        if order_id.is_empty() {
+            return OrderResult {
+                order_id,
+                status: OrderStatus::Rejected,
+                trades: vec![],
+                book_snap: BookSnapshot {
+                    bids_changed: vec![],
+                    asks_changed: vec![],
+                },
+            };
+        }
+
+        if self.order_ids.contains(&order_id) {
+            return OrderResult {
+                order_id,
+                status: OrderStatus::Rejected,
+                trades: vec![],
+                book_snap: BookSnapshot {
+                    bids_changed: vec![],
+                    asks_changed: vec![],
+                },
+            };
+        }
+
+        for level in self.asks.iter_mut() {
+            if level.price == price {
+                level.qty += qty;
+                self.order_ids.push(order_id.clone());
+                return OrderResult {
+                    order_id,
+                    status: OrderStatus::Accepted,
+                    trades: vec![],
+                    book_snap: BookSnapshot {
+                        bids_changed: vec![],
+                        asks_changed: vec![PriceLevel { price, qty: level.qty }],
+                    },
+                };
+            }
+        }
+
+        let level = PriceLevel { price, qty };
+        let pos = self.asks.iter().position(|l| l.price > price);
+
+        match pos {
+            Some(idx) => {
+                self.asks.insert(idx, level.clone());
+            }
+            None => {
+                self.asks.push(level.clone());
+            }
+        }
+
+        self.order_ids.push(order_id.clone());
+
+        OrderResult {
+            order_id,
+            status: OrderStatus::Accepted,
+            trades: vec![],
+            book_snap: BookSnapshot {
+                bids_changed: vec![],
+                asks_changed: vec![level],
             },
         }
     }

@@ -64,6 +64,14 @@ CLOSED: [2026-07-20 Sun]
 SpecKit feature: [[file:specs/001-limit-buy/spec.md][specs/001-limit-buy/spec.md]]
 3 user stories (P1: prazdna kniha, P2: agregace, P3: validace), 8 unit testu, cargo test prochazi.
 
+*** DONE 002-limit-sell — Limit Sell Order (SpecKit)
+CLOSED: [2026-07-20 Sun]
+:PROPERTIES:
+:Milestone: 2 — Core Matching Engine (Rust)
+:END:
+SpecKit feature: [[file:specs/002-limit-sell/spec.md][specs/002-limit-sell/spec.md]]
+3 user stories (P1: prazdne asks, P2: agregace, P3: validace + cross-side ID), 8 novych testu (16 celkem), cargo test prochazi.
+
 *** DONE fix(guide): verify message passing in local-stack-deployment.md
 CLOSED: [2026-07-16 Wed 08:01]
 - [X] Opravena Section 4 — správné volání submit-order! s plným setupem (zmq/connect, kafka/create-producer, try/finally)
