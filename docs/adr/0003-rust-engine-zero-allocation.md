@@ -1,3 +1,4 @@
+<!-- SSOT: .specify/ + specs/ | This file: human-readable reference, NOT normative -->
 # 3. Rust Engine Zero-Allocation Strategy
 
 ## Status

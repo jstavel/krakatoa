@@ -1,7 +1,8 @@
+<!-- SSOT: .specify/ + specs/ | This file: human-readable reference, NOT normative -->
 # Architectural Specification: Project Krakatoa
 
 ## 1. Introduction & Project Goal
-Project Krakatoa is a high-performance, polyglot engineering portfolio (Proof of Work) designed for Senior Platform and QA Automation Engineering roles. The core objective is to demonstrate the architecture, implementation, and chaos-engineering verification of a distributed system designed for High Availability (HA) and extreme throughput (targeting 1M+ RPS). The project simulates a high-frequency cryptocurrency exchange matching engine with strict guarantees around state consistency and fault tolerance.
+Project Krakatoa is a high-performance, polyglot engineering portfolio (Proof of Work) designed for Senior Platform and QA Automation Engineering roles. The core objective is to demonstrate the architecture, implementation, and chaos-engineering verification of a distributed system designed for High Availability (HA) and extreme throughput. The project simulates a high-frequency cryptocurrency exchange matching engine with strict guarantees around state consistency and fault tolerance.
 
 ## 2. Global Architecture (Polyglot & Polylith Workspace)
 The system pairs low-level, deterministic execution at the core with the structural safety, immutability, and modularity of functional component design for orchestration.
@@ -44,7 +45,7 @@ The software architecture directly inherits principles of strict interface-imple
 * Lock-Free Routing: The IP address of the currently active Rust engine node is held inside a Clojure Atom. Resolving this address utilizes the hardware-level CAS (Compare-And-Swap) processor instruction. This allows millions of operations per second to stream asynchronously over ZeroMQ without thread contention (mutexes) or context switching.
 * Hot Loading / Live Failover: Upon detecting a heartbeat loss from the primary Rust engine, the orchestration layer atomically swaps the address within the Atom. The Clojure gateway seamlessly routes subsequent packets to the backup node (Hot Standby). Because the backup node continuously consumes the same Kafka log in parallel, it maintains an identical in-memory order book and takes over as Master with zero message loss.
 
-### High-Performance JVM Memory Management (1M+ RPS)
+### High-Performance JVM Memory Management
 * Off-Heap Buffers: Utilizing direct byte buffers (DirectByteBuffers) via Netty/ZeroMQ. Clojure operates strictly at the pointer-shifting level without deserializing message payloads into high-level application objects inside the JVM heap.
 * Ring Buffer (LMAX Disruptor Pattern): Employs a pre-allocated circular array structure for message indexing. Inbound data overwrites existing slots sequentially, eliminating runtime allocations and completely bypassing JVM Garbage Collector stop-the-world pauses. This concept natively implements object rotation with sentinel boundaries (Canary Values) to guard against memory corruption.
 
@@ -53,22 +54,15 @@ The software architecture directly inherits principles of strict interface-imple
 ## 5. Project State & Execution Dashboard
 
 ### Current Status
-* **Project Phase:** Initialization & Infrastructure Bootstrap
-* **System State:** Greenfield (Empty repository, architecture finalized)
-* **Last Modified:** 2026-05-24
+* **Project Phase:** Milestone 2 — Core Matching Engine (Rust)
+* **System State:** Walking Skeleton operational (M1 complete), first feature spec created
+* **Last Modified:** 2026-07-16
+* **SSOT for features:** `specs/` directory
+* **SSOT for principles:** `.specify/memory/constitution.md`
 
-### Active Slice: Milestone 1 — The Walking Skeleton
-* **Goal:** Validate baseline end-to-end polyglot I/O. Establish a local, reactive pipeline from the Clojure gateway to the Rust matching engine over ZeroMQ, while concurrently persisting the raw transaction stream into a local Kafka broker.
-
-#### Current Focus / Brain Anchor
-* Initialize the root Monorepo directory structure, set up the bare Polylith workspace for Clojure, and scaffold an empty Rust crate in `engine/`. (This is the exact command-line starting point).
-
-### Definition of Done (DoD) for Active Slice
-* [ ] Local Kafka container runs smoothly via Podman Compose.
-* [ ] Emacs CIDER REPL is successfully hooked into the Polylith workspace.
-* [ ] Invoking a Clojure function sends raw bytes to the running Rust binary via ZeroMQ.
-* [ ] Rust engine receives the payload, logs it, and replies with an `"OK"` byte acknowledgement.
-* [ ] Clojure gateway records the incoming transaction to the local Kafka topic `order-log`.
+### Active Feature: 001-limit-buy
+SpecKit-managed feature specification at `specs/001-limit-buy/spec.md`.
+Next: `/speckit.plan` → `/speckit.tasks` → `/speckit.implement`.
 
 ## 6. Done Slices
-* (No slices completed yet. Awaiting Milestone 1 execution.)
+* **Milestone 1 — The Walking Skeleton** [COMPLETE]: Clojure gateway → ZeroMQ → Rust engine → Kafka persistence validated end-to-end via CIDER REPL.

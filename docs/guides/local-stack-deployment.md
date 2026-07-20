@@ -64,39 +64,64 @@ This connects your Emacs CIDER to the `live-gateway` project.
 
 ### 4. Execute the Gateway Function
 
-This will send an order through the entire pipeline.
+This will send an order through the entire pipeline: Clojure → ZeroMQ → Rust Engine → Kafka.
 
-1.  In your CIDER REPL buffer, type the following Clojure code to require the `gateway-api.core` namespace:
+1.  In your CIDER REPL buffer, require the necessary namespaces:
     ```clojure
     (require '[jstavel.gateway-api.core :as gateway])
+    (require '[jstavel.zmq-transport.interface :as zmq])
+    (require '[jstavel.kafka-client.interface :as kafka])
     ```
-    Evaluate this line (e.g., by placing the cursor after the closing parenthesis and pressing `C-x C-e`).
-2.  Now, call the `submit-order!` function with a sample payload. The `localhost:9092` should match your Redpanda's Kafka listener address.
+    Evaluate each line (e.g., by placing the cursor after the closing parenthesis and pressing `C-x C-e`).
+
+2.  Set up the components, send an order, and clean up:
     ```clojure
-    (gateway/submit-order! "localhost:9092" {:order-id "ORD-001" :price 100 :quantity 10})
+    (let [zmq-conn (zmq/connect "tcp://localhost:5555")       ;; ZMQ → Rust engine
+          producer (kafka/create-producer "localhost:9092")    ;; Kafka producer
+          topic    "order-log"
+          payload  (.getBytes "ORDER-001,BUY,BTC,1.0,50000" "UTF-8")]
+      (try
+        (gateway/submit-order! {:zmq-socket     zmq-conn
+                                :kafka-producer producer
+                                :topic          topic
+                                :payload        payload})
+        (finally
+          (zmq/close! zmq-conn)
+          (kafka/close! producer))))
     ```
-    Evaluate this form.
+    Evaluate the entire `let` form. It should return `:ok` on success.
 
 ### 5. Verify the Results
 
 Check the following to confirm the end-to-end pipeline is working:
 
 1.  **Rust Engine Terminal:**
-    *   Observe the terminal where your Rust engine is running (`cargo run`). You should see output indicating that it received the message from the Clojure gateway and sent back an ACK.
+    *   Observe the terminal where your Rust engine is running (`cargo run`). You should see output indicating that it received the message from the Clojure gateway and sent back an ACK:
+        ```
+        Engine: Received 28 bytes
+        ```
+
 2.  **Kafka Topic (`order-log`):**
     *   Open a **new** terminal.
-    *   Use the `rpk` CLI (part of Redpanda, if installed and in your PATH) to consume messages from the `order-log` topic:
+    *   Use the `rpk` CLI inside the Redpanda container:
         ```bash
-        rpk topic consume order-log -f '%v\n'
+        podman exec -it redpanda-krakatoa rpk topic consume order-log -f '%v\n'
         ```
-    *   Alternatively, if you have standard Kafka CLI tools installed:
+    *   Alternatively, if `rpk` is available on your host:
         ```bash
-        kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic order-log --from-beginning
+        rpk topic consume order-log -f '%v\n' -b localhost:9092
         ```
-    *   You should see the payload `{"order-id" "ORD-001" :price 100 :quantity 10}` (or a similar serialized form of your order map) printed, confirming the message was persisted to Kafka.
+    *   You should see the raw payload `ORDER-001,BUY,BTC,1.0,50000` printed, confirming the message was persisted to Kafka.
+
 3.  **CIDER REPL Response:**
-    *   The CIDER REPL should display the return value of the `(gateway/submit-order! ...)` call. This should indicate success (e.g., `nil`, `:ok`, a map with status, etc.), depending on your `submit-order!` implementation.
+    *   The CIDER REPL should display `:ok` as the return value, confirming the full pipeline succeeded.
 
 ---
 
-Once all these checks pass, the end-to-end pipeline is confirmed to be operational.
+### 6. Final Verification Checklist
+
+- [ ] **Rust Engine** logs `Engine: Received 28 bytes`
+- [ ] **Kafka** topic `order-log` contains `ORDER-001,BUY,BTC,1.0,50000` (verified via `podman exec -it redpanda-krakatoa rpk topic consume order-log -f '%v\n'`)
+- [ ] **CIDER REPL** returns `:ok`
+
+Once all three checks pass, the end-to-end pipeline is confirmed to be operational.

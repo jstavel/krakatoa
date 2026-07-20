@@ -1,3 +1,4 @@
+<!-- SSOT: .specify/ + specs/ | This file: human-readable reference, NOT normative -->
 # 1. Use Polylith Architecture for Clojure Orchestrator
 
 ## Status

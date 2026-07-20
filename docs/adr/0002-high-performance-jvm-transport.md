@@ -1,3 +1,4 @@
+<!-- SSOT: .specify/ + specs/ | This file: human-readable reference, NOT normative -->
 # 2. High-Performance JVM Transport & Memory Management
 
 ## Status

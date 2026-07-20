@@ -1,4 +1,5 @@
-# Execution Plan: Milestone 1 — The Walking Skeleton
+<!-- SSOT: .specify/ + specs/ | This file: human-readable reference, NOT normative -->
+# ARCHIVED: Execution Plan — Milestone 1 (complete, see specs/ for active work)
 
 ## Goal
 Establish a reactive end-to-end pipeline: Clojure Gateway -> ZeroMQ -> Rust Engine -> Kafka Persistence.

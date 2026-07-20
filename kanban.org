@@ -6,36 +6,28 @@
 #+STARTUP: content indent
 #+TODO: BACKLOG(b) NEXT(n) WIP(w) | DONE(d) CANCELLED(c)
 
+<!-- SSOT: .specify/ + specs/ | This file: human-readable reference (GTD board), NOT normative -->
+
 * PROJECT METRICS & ANCHOR
 :PROPERTIES:
-:Phase:     Initialization & Infrastructure Bootstrap
+:Phase:     Milestone 2 — Core Matching Engine (Rust)
 :Target:    1M+ RPS Polyglot MVP
 :Language:  Clojure (Polylith), Rust
 :END:
 
 This file serves as Horizon 1 (Next Actions) for cognitive anchoring.
-Global specification lives in [[file:docs/specification.md][docs/specification.md]].
-Individual design choices live in [[file:docs/adr/][docs/adr/]].
+**Single Source of Truth for features**: [[file:specs/][specs/]] directory.
+**Single Source of Truth for principles**: [[file:.specify/memory/constitution.md][.specify/memory/constitution.md]].
+Global specification lives in [[file:docs/specification.md][docs/specification.md]] (secondary reference).
+Individual design choices live in [[file:docs/adr/][docs/adr/]] (secondary reference).
 
 * KANBAN BOARD
-
 ** BACKLOG
 Detailed tasks waiting for prioritization and architectural readiness.
 
 - [X] fix(guide): normalize kanban.org and README.md for GitHub visualization
   - [X] Convert nested sections to checkbox lists in kanban.org
   - [X] Implement README.md status table for quick progress tracking
-
-- [ ] fix(guide): verify message passing in local-stack-deployment.md
-  :PROPERTIES:
-  :ID:       a12c9b12-7701-4769-9459-4bc4ed6f0482
-  :END:
-  [[file:docs/guides/local-stack-deployment.md::require '\[jstavel.gateway-api.core :as gateway\]][howto send message]]
-  An example how to send is in -main function
-  - [ ] Add a final verification
-    #+begin_src shell
-      podman exec -it redpanda-krakatoa rpk topic consume order-log -f '%v\n'
-    #+end_src
 
 - [ ] Milestone 2: Core Matching Engine (Rust)
   - [ ] Implement custom Memory Pool / Allocator for zero-allocation hot path
@@ -54,7 +46,7 @@ Detailed tasks waiting for prioritization and architectural readiness.
   - [ ] Choose paradigm (Re-frame event-driven SPA or htmx server-driven stream)
   - [ ] Create real-time rendering engine for the in-memory Order Book
 
-** NEXT 
+** NEXT
 Prioritized items selected for the immediate next execution slice. 
 *Brain Anchor:* These tasks will form the execution steps in `docs/current_slice.md`.
 
@@ -63,6 +55,20 @@ Tasks currently in active development. Max 1-2 items at a time to prevent cognit
 
 ** DONE
 Completed milestones and historical archive of done slices.
+
+*** DONE 001-limit-buy — Limit Buy Order (SpecKit)
+CLOSED: [2026-07-20 Sun]
+:PROPERTIES:
+:Milestone: 2 — Core Matching Engine (Rust)
+:END:
+SpecKit feature: [[file:specs/001-limit-buy/spec.md][specs/001-limit-buy/spec.md]]
+3 user stories (P1: prazdna kniha, P2: agregace, P3: validace), 8 unit testu, cargo test prochazi.
+
+*** DONE fix(guide): verify message passing in local-stack-deployment.md
+CLOSED: [2026-07-16 Wed 08:01]
+- [X] Opravena Section 4 — správné volání submit-order! s plným setupem (zmq/connect, kafka/create-producer, try/finally)
+- [X] Přidána Section 6 — Final Verification Checklist s podman exec rpk topic consume
+- [X] Smazán duplicitní how-to-run-the-whole-stack.md
 
 *** DONE Milestone 1: The Walking Skeleton [8/8]
 CLOSED: [2026-05-27 Wed 11:18]
