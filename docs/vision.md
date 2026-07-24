@@ -61,16 +61,70 @@ the New York Stock Exchange in 1910.
 
 ## What Exists Today
 
-| Layer | Status |
-|---|---|
-| Rust engine — limit buy/sell + crossing | ✅ Done (26 tests) |
-| Rust engine — ZMQ integration | ❌ `main.rs` echoes ACK, never calls OrderBook |
-| Clojure gateway — ZMQ transport | ✅ Done |
-| Clojure gateway — Kafka client | ✅ Done |
-| Clojure gateway — order validation | ❌ `order-book-vld` skeleton only |
-| Clojure gateway — chaos orchestration | ❌ `chaos-orchestra` skeleton only |
-| Analysis pipeline | ❌ Not started |
-| re-frame UI | ❌ Not started |
+| Layer                                   | Status                                         |
+|-----------------------------------------|------------------------------------------------|
+| Rust engine — limit buy/sell + crossing | ✅ Done (26 tests)                             |
+| Rust engine — ZMQ integration           | ❌ `main.rs` echoes ACK, never calls OrderBook |
+| Clojure gateway — ZMQ transport         | ✅ Done                                        |
+| Clojure gateway — Kafka client          | ✅ Done                                        |
+| Clojure gateway — order validation      | ❌ `order-book-vld` skeleton only              |
+| Clojure gateway — chaos orchestration   | ❌ `chaos-orchestra` skeleton only             |
+| Analysis pipeline                       | ❌ Not started                                 |
+| re-frame UI                             | ❌ Not started                                 |
+
+## Jepsen Testing — Distributed Correctness Verification
+
+[Jepsen](https://github.com/jepsen-io/jepsen) is a Clojure-based distributed systems
+testing framework by Kyle Kingsbury. It stresses systems with faults (network partitions,
+process kills, clock skew) and verifies that the system maintains correctness invariants.
+
+Krakatoa is a natural fit because it already has the key ingredients:
+
+- **Event sourcing via Kafka** — state is reconstructed from the transaction log
+- **Hot-failover design** — engine replicas consuming the same Kafka log
+- **Clojure gateway** — Jepsen is written in Clojure, so test code shares the language
+
+### What Jepsen Would Test
+
+```
+Jepsen nemesis                          Jepsen checker
+      │                                       │
+      │   ✕ kill Rust engine ✕                │
+      │   ✕ partition ZMQ link ✕              │
+      │   ✕ pause Kafka broker ✕              │
+      │                                       │
+      ▼                                       ▼
+┌──────────┐    ┌──────────┐          ┌──────────────┐
+│ Engine A │    │ Engine B │          │ Verify:       │
+│ (active) │    │ (hot-spare)         │ trades linear?│
+└────┬─────┘    └────┬─────┘          │ state = log?  │
+     │               │                │ no duplicates?│
+     └─── Kafka ─────┘                └──────────────┘
+```
+
+### Proposed Jepsen Tests (MVP Scope)
+
+1. **Kill-engine consistency**: Fire trades into engine A, kill it mid-crossing, promote
+   engine B. Verify Kafka replay produces identical order book state with no missing or
+   duplicate trades.
+
+2. **Partition tolerance**: Split the network between gateway and engine, submit orders on
+   both sides of the partition. On heal, verify all trades are present exactly once in
+   Kafka and the final book state matches a reference sequential execution.
+
+3. **Kafka lag replay**: Artificially delay Kafka consumption on a replica, let the
+   primary process hundreds of trades, then resume the replica. Verify it catches up to
+   identical state.
+
+### Job Application Angle
+
+Jepsen signals to **8am** (observability, Prometheus/Grafana) and **IP Fabric** (network
+testing domain) that you think beyond unit tests. A single Jepsen test demonstrating
+"Krakatoa survives engine kill with zero lost trades" is a resume anchor:
+
+> "Verified engine failover consistency using Jepsen — Clojure-based distributed systems
+> testing framework. Wrote generative test that kills the Rust engine mid-trade and
+> validates Kafka replay produces linearly consistent state."
 
 ## Suggested Next Steps
 
@@ -80,6 +134,8 @@ the New York Stock Exchange in 1910.
    gateway. Makes the full stack operational.
 3. **re-frame SPA** (ClojureScript) — Live order book + trade tape UI. The visual layer
    that turns engine output into something you can watch.
+4. **Jepsen test (single scenario)** — Kill-engine consistency check. One test, high
+   signal — proves both distributed systems thinking and Clojure testing depth.
 
 ## Why This Matters (Portfolio Narrative)
 
@@ -90,6 +146,7 @@ the full loop:
 - **Polylith Clojure gateway** — functional, REPL-driven architecture
 - **Wyckoff-inspired analysis** — domain depth, not just plumbing
 - **Re-frame data flow** — modern ClojureScript, real-time rendering
+- **Jepsen-verified consistency** — distributed correctness under failure (proposed)
 
 The project demonstrates polyglot boundary design, event sourcing, lock-free routing,
 and — uniquely — historical trading theory implemented in code.
