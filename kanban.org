@@ -30,10 +30,10 @@ Detailed tasks waiting for prioritization and architectural readiness.
   - [X] Implement README.md status table for quick progress tracking
 
 - [ ] Milestone 2: Core Matching Engine (Rust)
-  - [ ] Implement custom Memory Pool / Allocator for zero-allocation hot path
-  - [ ] Design internal Order Book data structure (Bids/Asks vectors/maps)
-  - [ ] Implement Limit Order processing logic
+  - [X] Design internal Order Book data structure (Bids/Asks vectors/maps)
+  - [X] Implement Limit Order processing logic (buy + sell + crossing)
   - [ ] Implement Market Order processing logic
+  - [ ] Implement custom Memory Pool / Allocator for zero-allocation hot path
 
 - [ ] Milestone 3: High-Availability & Chaos (Clojure/Infra)
   - [ ] Set up Packer templates for minimal KVM .qcow2 base OS images
@@ -71,6 +71,14 @@ CLOSED: [2026-07-20 Sun]
 :END:
 SpecKit feature: [[file:specs/002-limit-sell/spec.md][specs/002-limit-sell/spec.md]]
 3 user stories (P1: prazdne asks, P2: agregace, P3: validace + cross-side ID), 8 novych testu (16 celkem), cargo test prochazi.
+
+*** DONE 003-order-matching — Order Matching / Crossing Engine (SpecKit)
+CLOSED: [2026-07-23 Wed]
+:PROPERTIES:
+:Milestone: 2 — Core Matching Engine (Rust)
+:END:
+SpecKit feature: [[file:specs/003-order-matching/spec.md][specs/003-order-matching/spec.md]]
+3 user stories (P1: single cross, P2: partial fills, P3: multi-level sweep), 10 novych testu (26 celkem), cargo test prochazi, zero-alloc crossing loop.
 
 *** DONE fix(guide): verify message passing in local-stack-deployment.md
 CLOSED: [2026-07-16 Wed 08:01]
