@@ -118,8 +118,7 @@ Jepsen nemesis                          Jepsen checker
 
 ### Job Application Angle
 
-Jepsen signals to **8am** (observability, Prometheus/Grafana) and **IP Fabric** (network
-testing domain) that you think beyond unit tests. A single Jepsen test demonstrating
+Jepsen signals depth beyond unit tests. A single Jepsen test demonstrating
 "Krakatoa survives engine kill with zero lost trades" is a resume anchor:
 
 > "Verified engine failover consistency using Jepsen — Clojure-based distributed systems
