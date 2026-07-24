@@ -49,6 +49,7 @@ The project follows a **Spec-Driven Development (SDD)** workflow powered by the 
 **Secondary references (descriptive):**
 
 - [Architectural Specification](docs/specification.md) — Global architecture, monorepo layout, technical pillars
+- [Vision](docs/vision.md) — The full loop: engine → analysis → re-frame UI, Wyckoff-inspired trade tape
 - [Architecture Decision Records (ADRs)](docs/adr/) — Permanent records of major design decisions
 - [Local Deployment Guide](docs/guides/local-stack-deployment.md) — How to run the full stack locally
 
