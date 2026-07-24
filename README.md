@@ -52,6 +52,7 @@ The project follows a **Spec-Driven Development (SDD)** workflow powered by the 
 - [Vision](docs/vision.md) — The full loop: engine → analysis → re-frame UI, Wyckoff-inspired trade tape
 - [Architecture Decision Records (ADRs)](docs/adr/) — Permanent records of major design decisions
 - [Local Deployment Guide](docs/guides/local-stack-deployment.md) — How to run the full stack locally
+- [RFC: kraken-tap](docs/rfc-kraken-tap.md) — Market data capture & replay tool (draft for discussion)
 
 ## Monorepo Layout
 
