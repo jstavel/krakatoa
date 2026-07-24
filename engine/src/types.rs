@@ -1,10 +1,10 @@
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Side {
     Buy,
     Sell,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum OrderStatus {
     Accepted,
     Rejected,
@@ -16,8 +16,12 @@ pub struct PriceLevel {
     pub qty: u64,
 }
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct Trade {}
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Trade {
+    pub price: u64,
+    pub qty: u64,
+    pub taker_side: Side,
+}
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct BookSnapshot {
