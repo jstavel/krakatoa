@@ -39,7 +39,7 @@ The Rust matching engine implements a limit order book with active crossing:
 
 ## Project Documentation
 
-The project follows a **Spec-Driven Development (SDD)** workflow powered by the [SpecKit](https://github.com/github/spec-kit) framework. Every feature goes through a structured pipeline: `specify → clarify → plan → tasks → implement → converge`. This ensures traceability from requirements to code and prevents scope drift.
+The project follows a **Spec-Driven Development (SDD)** workflow powered by the [SpecKit](https://github.github.com/spec-kit/) framework. Every feature goes through a structured pipeline: `specify → clarify → plan → tasks → implement → converge`. This ensures traceability from requirements to code and prevents scope drift.
 
 **Primary references (normative):**
 
