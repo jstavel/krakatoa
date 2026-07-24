@@ -39,12 +39,18 @@ The Rust matching engine implements a limit order book with active crossing:
 
 ## Project Documentation
 
-The repository follows a strict separation between long-term architectural specifications and temporary task management execution plans. You can explore the project depth via the following documentation paths:
+The project follows a **Spec-Driven Development (SDD)** workflow powered by the [SpecKit](https://github.com/anomalyco/speckit) framework. Every feature goes through a structured pipeline: `specify → clarify → plan → tasks → implement → converge`. This ensures traceability from requirements to code and prevents scope drift.
 
-- [Architectural Specification](docs/specification.md) — The living document outlining the global architecture, monorepo layout, technical pillars, and current project execution dashboard.
-- [Feature Specifications](specs/) — SpecKit-driven feature specs, plans, tasks, and convergence reports.
-- [Architecture Decision Records (ADRs)](docs/adr/) — Dedicated directory containing permanent, immutable records of all major design decisions (e.g., component strategies, memory management patterns).
-- [Active Slice Development Plan](docs/current_slice.md) — The granular, GTD-inspired task list currently being executed in the current development sprint.
+**Primary references (normative):**
+
+- [Constitution](.specify/memory/constitution.md) — Governing principles and non-negotiable constraints (v1.2.0)
+- [Feature Specifications](specs/) — Per-feature specs, plans, task lists, data models, and contracts
+
+**Secondary references (descriptive):**
+
+- [Architectural Specification](docs/specification.md) — Global architecture, monorepo layout, technical pillars
+- [Architecture Decision Records (ADRs)](docs/adr/) — Permanent records of major design decisions
+- [Local Deployment Guide](docs/guides/local-stack-deployment.md) — How to run the full stack locally
 
 ## Monorepo Layout
 
