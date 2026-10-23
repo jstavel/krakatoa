@@ -1,12 +1,22 @@
 # Krakatoa
 
-High-performance polyglot matching engine (Clojure/Rust) built on Polylith architecture, featuring ZeroMQ transport, Kafka event sourcing, and chaos-testing.
+Early-stage polyglot matching engine (Rust/Clojure) on Polylith architecture.
+The Rust matching core runs and is tested; the Clojure transport/supervisor layer
+is scaffolded, and the chaos/Jepsen-style verification layer is specified but not
+yet built.
 
 ## Overview
 
-**Krakatoa** is a high-throughput, fault-tolerant distributed matching engine designed to demonstrate sub-millisecond hot-failover and 1M+ RPS capability on the JVM. The project serves as an advanced engineering portfolio (Proof of Work) focusing on systems architecture, low-level memory management, and automated resilient infrastructure.
+**Krakatoa** is an in-progress distributed matching engine, built in public as a
+proof of work in systems architecture and spec-first delivery. The **target**
+design is sub-millisecond hot-failover with event sourcing over Kafka — those are
+targets on the roadmap, not measured results.
 
-By pairing a zero-allocation matching core written in **Rust** with a flexible, modular gateway and supervisor layer written in **Clojure**, Krakatoa achieves extreme performance without sacrificing architectural clarity.
+What exists today is the part that can be checked: a **Rust matching core** with a
+limit order book, price–time priority, taker–maker crossing, partial fills and
+multi-level sweeps, covered by 26 `cargo test` cases across three spec-first specs.
+**Zero-allocation on the hot path** is a design constraint of that core, not yet
+a benchmarked claim.
 
 ## Project Kanban Board
 
@@ -15,12 +25,28 @@ By pairing a zero-allocation matching core written in **Rust** with a flexible, 
 | • [Milestone 3: HA/Chaos](kanban.org#milestone-3) | | • [Milestone 2: Engine](kanban.org#milestone-2) | • [Milestone 1: Skeleton](kanban.org#milestone-1) |
 | • [Milestone 4: Frontend](kanban.org#milestone-4) | | | |
 
-## Key Features & Pillars
+## Status — honest by design
 
-- **Polylith Architecture:** The Clojure layer is built using strict component-based design, allowing 100% code reuse between production gateways and destruction testware.
-- **Low-Latency Transport:** Communication across the polyglot boundary is driven by ZeroMQ utilizing off-heap direct byte buffers to minimize JVM Garbage Collection overhead.
-- **State Consistency:** Full event-sourcing implementation backed by an Apache Kafka transaction log.
-- **Automated Chaos Engineering:** The infrastructure is fully virtualized via KVM and managed via Terraform to rigorously test automated hot-failover state machines under simulated hardware drops.
+| Area | State |
+|---|---|
+| Rust matching core (limit buy/sell, crossing, partial fills, sweeps) | **Built & tested** — 26 `cargo test` cases, specs 001–003 |
+| Market orders, cancellation, memory pool | **Specified** (spec 004) — not implemented |
+| Clojure/Polylith components: ZeroMQ transport, Kafka client, chaos orchestrator | **Scaffolded** — components, interfaces and specs exist; stubs, not working transport |
+| Infra | **Local compose only** (`infra/podman-local`) — no KVM/Terraform stack yet |
+| Chaos / distributed consistency verification (Jepsen-style) | **Planned** — Milestone 3, backlog |
+| Frontend (re-frame, Wyckoff-inspired tape) | **Vision only** |
+
+## Design pillars (target architecture)
+
+- **Polylith Architecture:** strict component-based design for the Clojure layer, so
+  production gateways and testware can share code.
+- **Low-Latency Transport (planned):** ZeroMQ across the polyglot boundary, off-heap
+  direct byte buffers to reduce GC pressure — the component is scaffolded.
+- **State Consistency (planned):** event sourcing backed by a Kafka transaction log —
+  the client component is scaffolded; no working pipeline yet.
+- **Chaos Engineering (planned):** KVM- and Terraform-managed environments to test
+  hot-failover state machines under simulated hardware drops. This is the reason the
+  project exists; it is not implemented, so no chaos results are claimed.
 
 ## Engine Status (Milestone 2 — In Progress)
 
